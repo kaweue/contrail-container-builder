@@ -40,10 +40,14 @@ public_fip_pool=${KUBERNETES_PUBLIC_FIP_POOL:-"{}"}
 vnc_endpoint_ip=$CONFIG_NODES
 vnc_endpoint_port=$CONFIG_API_PORT
 
+db_driver=$DB_DRIVER
+notification_driver=$NOTIFICATION_DRIVER
+
 rabbit_server=$RABBITMQ_NODES
 rabbit_port=$RABBITMQ_NODE_PORT
 $rabbit_config
 $kombu_ssl_config
+$etcd_config
 
 cassandra_server_list=$cassandra_server_list
 cassandra_use_ssl=${CASSANDRA_SSL_ENABLE,,}

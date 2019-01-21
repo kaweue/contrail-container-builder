@@ -16,6 +16,8 @@ api_server_port=$CONFIG_API_PORT
 log_file=$LOG_DIR/contrail-schema.log
 log_level=$LOG_LEVEL
 log_local=$LOG_LOCAL
+db_driver=$DB_DRIVER
+notification_driver=$NOTIFICATION_DRIVER
 cassandra_server_list=$cassandra_server_list
 cassandra_use_ssl=${CASSANDRA_SSL_ENABLE,,}
 cassandra_ca_certs=$CASSANDRA_SSL_CA_CERTFILE
@@ -24,6 +26,7 @@ zk_server_ip=$ZOOKEEPER_SERVERS
 rabbit_server=$RABBITMQ_SERVERS
 $rabbit_config
 $kombu_ssl_config
+$etcd_config
 
 collectors=$COLLECTOR_SERVERS
 

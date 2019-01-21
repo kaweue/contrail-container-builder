@@ -9,6 +9,7 @@ hostname=$(resolve_hostname_by_ip $hostip)
 
 rabbitmq_server_list=$(echo $RABBITMQ_SERVERS | sed 's/,/ /g')
 configdb_cql_servers=$(echo $CONFIGDB_CQL_SERVERS | sed 's/,/ /g')
+configdb_eql_servers=$(echo $CONFIGDB_EQL_SERVERS | sed 's/,/ /g')
 
 cat > /etc/contrail/contrail-control.conf << EOM
 [DEFAULT]
@@ -38,11 +39,16 @@ $xmpp_certs_config
 # sandesh_send_rate_limit=
 
 [CONFIGDB]
-config_db_server_list=$configdb_cql_servers
+config_db_server_list=$configdb_eql_servers
 # config_db_username=
 # config_db_password=
 config_db_use_ssl=${CASSANDRA_SSL_ENABLE,,}
 config_db_ca_certs=$CASSANDRA_SSL_CA_CERTFILE
+config_db_use_etcd=${CONFIGDB_USE_ETCD}
+etcd_use_ssl=${CONFIGDB_ETCD_USE_SSL}
+etcd_key_file=${CONFIGDB_ETCD_KEY_FILE}
+etcd_cert_file=${CONFIGDB_ETCD_CERT_FILE}
+etcd_ca_cert_file=${CONFIGDB_ETCD_CA_CERT_FILE}
 
 rabbitmq_server_list=$rabbitmq_server_list
 $rabbitmq_config
